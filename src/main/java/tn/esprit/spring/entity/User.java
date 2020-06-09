@@ -59,6 +59,8 @@ public class User {
 	private Set<Fiche> fiche;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private Set<Reclamation> Reclamations;
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+	//private Set<Dossier> dossiers;
 	public Long getId() {
 		return id;
 	}
@@ -172,7 +174,8 @@ public class User {
 		return "User [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", cin=" + cin + ", tel=" + tel + ", email="
 				+ email + ", codepostal=" + codepostal + ", adresse=" + adresse + ", profession=" + profession
 				+ ", relation=" + relation + ", password=" + password + ", datenaissance=" + datenaissance + ", type="
-				+ type + "]";
+				+ type + ", Subscriptions=" + Subscriptions + ", Surveillances=" + Surveillances + ", Assurances="
+				+ Assurances + ", fiche=" + fiche + ", Reclamations=" + Reclamations + ", dossiers=" +  "]";
 	}
 	public User(Long id, String prenom, String nom, Long cin, Long tel, String email, Long codepostal, String adresse,
 			String profession, String relation, String password, Date datenaissance, Type type) {
@@ -208,6 +211,33 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.type = type;
+	}
+	
+	
+	public User(Long id, String prenom, String nom, Long cin, Long tel, String email, Long codepostal, String adresse,
+			String profession, String relation, String password, Date datenaissance, Type type,
+			Set<Subscription> subscriptions, Set<Surveillance> surveillances, Set<Assurance> assurances,
+			Set<Fiche> fiche, Set<Reclamation> reclamations, Set<Dossier> dossiers) {
+		super();
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.cin = cin;
+		this.tel = tel;
+		this.email = email;
+		this.codepostal = codepostal;
+		this.adresse = adresse;
+		this.profession = profession;
+		this.relation = relation;
+		this.password = password;
+		this.datenaissance = datenaissance;
+		this.type = type;
+		Subscriptions = subscriptions;
+		Surveillances = surveillances;
+		Assurances = assurances;
+		this.fiche = fiche;
+		Reclamations = reclamations;
+	
 	}
 	
 	

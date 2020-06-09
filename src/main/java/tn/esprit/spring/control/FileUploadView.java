@@ -3,18 +3,19 @@ package tn.esprit.spring.control;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.FileUploadEvent;
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.omg.CORBA.portable.InputStream;
+import org.omg.CORBA.portable.OutputStream;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
-@ViewScoped
+/*@ViewScoped
 @ManagedBean(name = "fileUploadManagedBean")
 public class FileUploadView {
 
@@ -74,8 +75,53 @@ public void handleFileUpload(FileUploadEvent event) throws IOException {
 		uploadAttachment.add(event.getFile());
 
 	}*/
+/*
+@Scope(value = "session")
+@Controller(value = "fileUploadView")
+@ELBeanName(value = "fileUploadView")
+public class FileUploadView implements Serializable {
 
-	
-	
-}
-	 
+	private static final long serialVersionUID = 6191889143079517027L;
+
+	private UploadedFile file;
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+
+	public void upload() {
+		if (file != null) {
+			FacesMessage message = new FacesMessage("Successful! ", file.getFileName() + " is uploaded.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else
+			System.out.println("file is null");
+	}
+
+	public void handleFileUpload(FileUploadEvent event) {
+		l.info("eyaaaaa" + event.getFile().getFileName());
+		FacesMessage msg = new FacesMessage("Successful! ", event.getFileName() + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void TransferFile(String fileName, InputStream in) {
+		try {
+			FileOutputStream out = new FileOutputStream(new File(destination + fileName));
+			int reader = 0;
+			byte[] bytes = new byte[(int) file.getSize()];
+			while ((reader = in.read(bytes)) != -1) {
+				out.write(bytes, 0, reader);
+			}
+			in.close();
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+}*/

@@ -44,7 +44,7 @@
         <p:outputLabel for="@next" value="Location:" class="control-label" />
         
       
-        <p:selectOneMenu id="city" value="#{selectOneMenuView.city}" effect="fold" editable="true">
+        <p:selectOneMenu id="city" value="#{pubController.adresse}" effect="fold" editable="true">
             <f:selectItem itemLabel="Select One" itemValue="" />
             <f:selectItems value="#{selectOneMenuView.cities}" />
         </p:selectOneMenu>
@@ -54,32 +54,21 @@
         <div class="form-group" > 
          <p:outputLabel for="@next" value="Property Type:" class="control-label"  />
     
-        <p:selectOneMenu id="advanced" value="#{selectOneMenuView.theme}" converter="#{themeConverter}" panelStyle="width:180px"
-        effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
-       <f:selectItems value="#{selectOneMenuView.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+        <p:selectOneMenu id="advanced" value="#{pubController.type}"  panelStyle="width:180px"
+        effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="exact">
+       <f:selectItem itemLabel="appartment" itemValue="appartment" />
+            <f:selectItem itemLabel="house" itemValue="house" />
+            <f:selectItem itemLabel="villa" itemValue="villa" />
+            <f:selectItem itemLabel="chateau" itemValue="chateau" />
  
-  <p:column style="width:10%">
-                <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{t.name}.png" alt="#{t.name}" styleClass="ui-theme" />
-            </p:column>
- 
-            <p:column>
-               <f:facet name="header">
-                   <h:outputText value="Name"/>
-                </f:facet>
-                <h:outputText value="#{t.displayName}" />
-            </p:column>
-             
-            <f:facet name="footer">
-               <p:separator />
-               <h:outputText value="#{selectOneMenuView.themes.size()} themes" style="font-weight:bold;"/>
-            </f:facet>
+  
         </p:selectOneMenu>
         </div>
        
         <div class="form-group">
         
          <p:outputLabel for="@next" value="Bedrooms:"  class="control-label" />
-        <p:selectOneMenu id="longItemLabel" value="#{selectOneMenuView.longItemLabel}" style="width:100px">
+        <p:selectOneMenu id="longItemLabel" value="#{pubController.rooms}" style="width:100px">
             <f:selectItem itemLabel="S+1" itemValue="1" />
             <f:selectItem itemLabel="S+2" itemValue="2" />
             <f:selectItem itemLabel="S+3" itemValue="3" />
@@ -118,7 +107,7 @@
     <p:growl id="growl" showDetail="true" />
      <p:outputLabel for="@next" value="Price:"  class="control-label" />
     <h:panelGrid columns="1" style="margin-bottom: 10px">
-        <p:spinner id="spinner1" value="#{sliderView.number3}" min="0" max="1000" stepFactor="50" suffix=" €" valueChangeListener="#{sliderView.onInputChanged}">
+        <p:spinner id="spinner1" value="#{pubController.price}" min="0" max="1000" stepFactor="50" suffix=" €" valueChangeListener="#{sliderView.onInputChanged}">
             <p:ajax process="@this" update="growl" />
         </p:spinner>
         <p:slider for="spinner1" minValue="0" maxValue="1000" step="50" />
@@ -151,7 +140,7 @@
     <p:growl id="growl" showDetail="true" />
      <p:outputLabel for="@next" value="Habitable Area:"  class="control-label" />
     <h:panelGrid columns="1" style="margin-bottom: 10px">
-        <p:spinner id="spinner1" value="#{sliderView.number3}" min="0" max="1000" stepFactor="50" suffix=" sq ft" valueChangeListener="#{sliderView.onInputChanged}">
+        <p:spinner id="spinner1" value="#{pubController.intSurface}" min="0" max="1000" stepFactor="50" suffix=" sq ft" valueChangeListener="#{sliderView.onInputChanged}">
             <p:ajax process="@this" update="growl" />
         </p:spinner>
         <p:slider for="spinner1" minValue="0" maxValue="1000" step="50" />
@@ -189,7 +178,7 @@
     <p:growl id="growl" showDetail="true" />
      <p:outputLabel for="@next" value="Ground Area:"  class="control-label" />
     <h:panelGrid columns="1" style="margin-bottom: 10px">
-        <p:spinner id="spinner1" value="#{sliderView.number3}" min="0" max="1000" stepFactor="50" suffix=" sq ft" valueChangeListener="#{sliderView.onInputChanged}">
+        <p:spinner id="spinner1" value="#{pubController.extSurface}" min="0" max="1000" stepFactor="50" suffix=" sq ft" valueChangeListener="#{sliderView.onInputChanged}">
             <p:ajax process="@this" update="growl" />
         </p:spinner>
         <p:slider for="spinner1" minValue="0" maxValue="1000" step="50" />
@@ -217,13 +206,13 @@
             <h:outputText value="Range: [#{sliderView.number8},#{sliderView.number9}]" />
         </h:panelGrid>
     </p:dialog>
-</h:form>         
+        </h:form> 
 </div>
 
 
 <div class="form__buttons form__buttons--double" style="height: 20px;top: 50px">
 <p:commandButton value="Reset"  class="form__reset js-form-reset"  style="height: 40px" />
-<p:commandButton value="Search"  class="form__submit"  style="height: 40px"/>                  
+<p:commandButton value="Search" action="#{pubController.getSearch()}"  class="form__submit"  style="height: 40px"/>                  
                 </div>        
         
         

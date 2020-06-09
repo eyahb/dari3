@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:f="http://java.sun.com/jsf/core" 
+ xmlns:h="http://java.sun.com/jsf/html" 
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:p="http://primefaces.org/ui" 
+ template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content"> 
+<!-- BEGIN : TP1 JSF Introduction Login --> 
+
+<h:head>
+
+<link href="../../resources/assets/css/vendor.css"  rel="stylesheet" />
+		<link href="../../resources/assets/css/font-awesome.css"  rel="stylesheet" />
+		<link href="../../resources/assets/css/theme-light_blue-beige.css"  rel="stylesheet" />
+		<link href="../..resources/assets/css/custom.css"  rel="stylesheet" />
+		<link href="../../resources/assets/css/ie-fix.css"  rel="stylesheet" />
+		<link href="../../resources/assets/img/favicon.ico" rel="stylesheet" />
+		<link href="../../resources/assets/img/favicon.ico" rel="stylesheet" type="image/x-icon" />
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<script type='text/javascript'>
+		jQuery(function(){ var jq = jQuery.noConflict(true);});
+    	</script>
+    <script type='text/javascript'>
+    document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    doStuff(e);
+}, { passive: false });</script>
+  
+
+ <meta charset="utf-8" />
+<title>Add a geocoder</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; height:700px; }
+</style>
+ 
+</h:head>	
+<h:body>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
+
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<p:gmap id="map" widgetVar="geoMap" center="#{markersView.centerGeoMap}" zoom="2" type="ROADMAP" model="#{markersView.simpleModel}" style="width:100%;height:400px">
+        <p:ajax event="geocode" listener="#{markersView.onGeocode}" update="@this" />
+    </p:gmap>
+ 
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZXlhaGFyaWJpIiwiYSI6ImNrYXpiYnUzdjAwNTYyd3FvYnk1MHJpaTkifQ.6Zmwe8Olm1frg3Ab8ZUelg';
+
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [37.281113, 9.872362],
+zoom: 10
+});
+$( document ).ready(function () {
+	 var mycoor;
+       $.ajax({
+           type: "GET",
+           url: "http://localhost/jsonapi/",
+           dataType: "json",
+           success: function(data) {
+              window.mycoor = data;
+ 
+            
+           }   
+       });
+       
+     
+       
+
+});
+
+ 
+map.addControl(
+new MapboxGeocoder({
+accessToken: mapboxgl.accessToken,
+mapboxgl: mapboxgl
+})
+);
+var marker = new mapboxgl.Marker()
+.setLngLat([10.094097, 37.133897])
+.addTo(map);
+var marker1 = new mapboxgl.Marker()
+.setLngLat([10.154047, 36.814302])
+.addTo(map);
+var marker2 = new mapboxgl.Marker()
+.setLngLat([10.159411, 36.811631])
+.addTo(map);
+</script>
+
+
+
+
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,drawing,geometry"></script>
+    <script type="text/javascript" src="http://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+   
+    <script type="text/javascript" src="../../resources/assets/js/vendor.js"></script>
+   
+    <script type="text/javascript" src="../../resources/assets/js/demodata.js"></script>
+ 
+    <script type="text/javascript" src="../../resources/assets/js/app.js"></script>
+ 
+    <script type="text/javascript" src="../../resources/assets/js/demo.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>  
+<script type="text/javascript">
+    var j$132 = $.noConflict(true);
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script type="text/javascript">
+    var j$144 = $.noConflict(true);
+</script>
+    
+   
+    
+</h:body>
+
+</ui:define>
+</ui:composition>
+

@@ -25,7 +25,7 @@ public class UserController  {
 	@Autowired
 	UserSerivce userservice;
 	
-
+	public static User USERCONNECTED;
 	
 	
 	public long ajouterUser(User user)
@@ -131,6 +131,7 @@ public class UserController  {
 		{ 
 			navigateTo = "/pages/user/welcomeUser.xhtml?faces-redirect=true";
 			loggedIn = true;
+			user = USERCONNECTED;
 		}
 		
 		else {

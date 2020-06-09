@@ -94,6 +94,7 @@ public class LocationController {
 	@Temporal(TemporalType.DATE)
 	public Date DateArrivee;
 	public int nbPersonne;
+	
 	private List<Location> locations;
 	private long locationIdToBeUpdated;
 

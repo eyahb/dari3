@@ -27,6 +27,7 @@ public class Location implements Serializable {
 	private Date DateArrivee;
 	private int nbPersonne;
 
+
 	public Location() {
 	}
 
@@ -42,6 +43,7 @@ public class Location implements Serializable {
 		this.DateDepart = dateDepart;
 		this.DateArrivee = dateArrivee;
 		this.nbPersonne = nbPersonne;
+		
 	}
 	
 	
